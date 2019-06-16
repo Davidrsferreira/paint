@@ -1,15 +1,17 @@
 package org.academiadecodigo.whiledlins.gfx;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
-import static org.academiadecodigo.whiledlins.paint.Paint.CELL_SIZE;
-import static org.academiadecodigo.whiledlins.paint.Paint.HEIGHT;
-import static org.academiadecodigo.whiledlins.paint.Paint.WIDTH;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import static org.academiadecodigo.whiledlins.paint.Paint.*;
 
 public class Pencil extends Rectangle implements KeyboardHandler {
     
@@ -52,12 +54,17 @@ public class Pencil extends Rectangle implements KeyboardHandler {
         save.setKey(KeyboardEvent.KEY_S);
         save.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+        KeyboardEvent load = new KeyboardEvent();
+        load.setKey(KeyboardEvent.KEY_L);
+        load.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
         keyboard.addEventListener(left);
         keyboard.addEventListener(right);
         keyboard.addEventListener(up);
         keyboard.addEventListener(down);
         keyboard.addEventListener(space);
         keyboard.addEventListener(save);
+        keyboard.addEventListener(load);
 
     }
 
@@ -65,6 +72,7 @@ public class Pencil extends Rectangle implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
         switch (keyboardEvent.getKey()) {
+
             case KeyboardEvent.KEY_LEFT:
                 if ((getX() - CELL_SIZE) < 0) return;
                 this.translate(-CELL_SIZE,0);
@@ -95,13 +103,82 @@ public class Pencil extends Rectangle implements KeyboardHandler {
                 } else {
                     cells[x][y].fill();
                 }
-        }
+                break;
 
+            case KeyboardEvent.KEY_S:
+
+                FileOutputStream fileOutputStream;
+
+                try {
+                    fileOutputStream = new FileOutputStream("./resources/file.txt");
+                    byte[] buffer = new byte[ROWS];
+
+                    for (int i = 0; i < cells.length; i++){
+                        for (int j = 0; j < cells.length; j++){
+                            if (cells[i][j].isFilled()) {
+                                buffer[j] = 1;
+                            } else {
+                                buffer[j] = 0;
+                            }
+                        }
+
+                        fileOutputStream.write(buffer);
+                    }
+
+                    fileOutputStream.close();
+                    clear();
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+            case KeyboardEvent.KEY_L:
+
+                FileInputStream fileInputStream;
+                try {
+                    fileInputStream = new FileInputStream("./resources/file.txt");
+
+                    byte[] buffer = new byte[ROWS];
+                    int row = 0;
+
+                    while (fileInputStream.read(buffer) != -1) {
+
+                        for (int i = 0; i < cells.length; i++) {
+                            if (buffer[i] == 0) {
+                                cells[row][i].draw();
+                            } else {
+                                cells[row][i].fill();
+                            }
+                        }
+                        row++;
+                    }
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+        }
 
     }
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
+        //Not used.
+    }
 
+    private void clear() {
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells.length; j++) {
+                cells[i][j].draw();
+            }
+        }
     }
 }

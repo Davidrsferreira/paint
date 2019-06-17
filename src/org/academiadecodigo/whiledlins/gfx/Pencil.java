@@ -5,11 +5,13 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.whiledlins.file.FileManager;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 import static org.academiadecodigo.whiledlins.paint.Paint.*;
 
@@ -19,11 +21,13 @@ public class Pencil extends Rectangle implements KeyboardHandler {
     private Rectangle[][] cells;
     private int x;
     private int y;
+    private FileManager fileManager;
 
     public Pencil(int x, int y, int cols, int rows, Rectangle[][] cells){
         super(x, y, cols, rows);
         keyboard = new Keyboard(this);
         this.cells = cells;
+        fileManager = new FileManager("./resources/file.txt");
         init();
 
     }
@@ -111,63 +115,12 @@ public class Pencil extends Rectangle implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_S:
-
-                FileOutputStream fileOutputStream;
-
-                try {
-                    fileOutputStream = new FileOutputStream("./resources/file.txt");
-                    byte[] buffer = new byte[ROWS];
-
-                    for (int i = 0; i < cells.length; i++){
-                        for (int j = 0; j < cells.length; j++){
-                            if (cells[i][j].isFilled()) {
-                                buffer[j] = 1;
-                            } else {
-                                buffer[j] = 0;
-                            }
-                        }
-
-                        fileOutputStream.write(buffer);
-                    }
-
-                    fileOutputStream.close();
-                    clear();
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                fileManager.save(cells);
+                clear();
                 break;
 
             case KeyboardEvent.KEY_L:
-
-                FileInputStream fileInputStream;
-                try {
-                    fileInputStream = new FileInputStream("./resources/file.txt");
-
-                    byte[] buffer = new byte[ROWS];
-                    int row = 0;
-
-                    while (fileInputStream.read(buffer) != -1) {
-
-                        for (int i = 0; i < cells.length; i++) {
-                            if (buffer[i] == 0) {
-                                cells[row][i].draw();
-                            } else {
-                                cells[row][i].fill();
-                            }
-                        }
-                        row++;
-                    }
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                fileManager.load(cells);
                 break;
 
             case KeyboardEvent.KEY_C:

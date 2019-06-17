@@ -2,10 +2,7 @@ package org.academiadecodigo.whiledlins.file;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 import static org.academiadecodigo.whiledlins.paint.Paint.ROWS;
 
@@ -20,46 +17,45 @@ public class FileManager {
 
     public void save(Rectangle[][] cells) {
 
-        FileOutputStream fileOutputStream;
+        FileWriter writer;
         try {
 
-            fileOutputStream = new FileOutputStream(path);
-
-            byte[] buffer = new byte[ROWS];
+            writer = new FileWriter(path);
+            BufferedWriter bWriter = new BufferedWriter(writer);
+            String buffer = "";
 
             for (int i = 0; i < cells.length; i++) {
                 for (int j = 0; j < cells.length; j++) {
                     if (cells[i][j].isFilled()) {
-                        buffer[j] = 1;
+                        buffer = buffer;//getColor(cells[i][j]);
                     } else {
-                        buffer[j] = 0;
+                        buffer = buffer + "W";
                     }
                 }
 
-                fileOutputStream.write(buffer);
+                bWriter.write(buffer);
+                bWriter.newLine();
+                buffer = "";
             }
 
-            fileOutputStream.close();
+            bWriter.flush();
+            bWriter.close();
 
-        } catch (
-                FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (
-                IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void load(Rectangle[][] cells){
 
-        FileInputStream fileInputStream;
+        FileReader fileReader;
         try {
-            fileInputStream = new FileInputStream(path);
+            fileReader = new FileReader(path);
 
-            byte[] buffer = new byte[ROWS];
+            char[] buffer = new char[ROWS];
             int row = 0;
 
-            while (fileInputStream.read(buffer) != -1) {
+            while (fileReader.read(buffer) != -1) {
 
                 for (int i = 0; i < cells.length; i++) {
                     if (buffer[i] == 0) {
@@ -71,8 +67,6 @@ public class FileManager {
                 row++;
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

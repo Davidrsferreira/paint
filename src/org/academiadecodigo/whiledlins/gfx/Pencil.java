@@ -58,6 +58,10 @@ public class Pencil extends Rectangle implements KeyboardHandler {
         load.setKey(KeyboardEvent.KEY_L);
         load.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+        KeyboardEvent clear = new KeyboardEvent();
+        clear.setKey(KeyboardEvent.KEY_C);
+        clear.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
         keyboard.addEventListener(left);
         keyboard.addEventListener(right);
         keyboard.addEventListener(up);
@@ -65,6 +69,7 @@ public class Pencil extends Rectangle implements KeyboardHandler {
         keyboard.addEventListener(space);
         keyboard.addEventListener(save);
         keyboard.addEventListener(load);
+        keyboard.addEventListener(clear);
 
     }
 
@@ -163,6 +168,10 @@ public class Pencil extends Rectangle implements KeyboardHandler {
                     e.printStackTrace();
                 }
 
+                break;
+
+            case KeyboardEvent.KEY_C:
+                clear();
                 break;
 
         }

@@ -100,6 +100,7 @@ public class Pointer extends Cell implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_L:
+                clear();
                 fileManager.load(cells);
                 break;
 

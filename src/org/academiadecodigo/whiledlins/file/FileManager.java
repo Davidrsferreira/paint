@@ -61,10 +61,6 @@ public class FileManager {
 
                     if (buffer[i] == '\n') continue;
 
-                    if (buffer[i] == 'W') {
-                        cells[row][i].paint();
-                        continue;
-                    }
                     if (buffer[i] == 'F') {
                         cells[row][i].paint();
                     }

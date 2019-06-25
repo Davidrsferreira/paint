@@ -1,30 +1,22 @@
 package org.academiadecodigo.whiledlins.gfx;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.whiledlins.cell.Cell;
 import org.academiadecodigo.whiledlins.file.FileManager;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Properties;
+public class Pointer extends Cell implements KeyboardHandler {
 
-import static org.academiadecodigo.whiledlins.paint.Paint.*;
-
-public class Pencil extends Rectangle implements KeyboardHandler {
-    
     private Keyboard keyboard;
-    private Rectangle[][] cells;
-    private int x;
-    private int y;
+    private Cell[][] cells;
     private FileManager fileManager;
 
-    public Pencil(int x, int y, int cols, int rows, Rectangle[][] cells){
-        super(x, y, cols, rows);
+    public Pointer(int x, int y, Cell[][] cells, Color color){
+        super(x, y, color);
+        paint();
         keyboard = new Keyboard(this);
         this.cells = cells;
         fileManager = new FileManager("./resources/file.txt");
@@ -83,35 +75,23 @@ public class Pencil extends Rectangle implements KeyboardHandler {
         switch (keyboardEvent.getKey()) {
 
             case KeyboardEvent.KEY_LEFT:
-                if ((getX() - CELL_SIZE) < 0) return;
-                this.translate(-CELL_SIZE,0);
-                this.y = this.y - 1;
+                moveLeft();
                 break;
 
             case KeyboardEvent.KEY_RIGHT:
-                if ((getX() + CELL_SIZE) > WIDTH) return;
-                this.translate(CELL_SIZE,0);
-                this.y = this.y + 1;
+                moveRight();
                 break;
 
             case KeyboardEvent.KEY_UP:
-                if ((getY() - CELL_SIZE) < 0) return;
-                this.translate(0, -CELL_SIZE);
-                this.x = this.x - 1;
+                moveUp();
                 break;
 
             case KeyboardEvent.KEY_DOWN:
-                if ((getY() + CELL_SIZE) > HEIGHT) return;
-                this.translate(0, CELL_SIZE);
-                this.x = this.x + 1;
+                moveDown();
                 break;
 
             case KeyboardEvent.KEY_SPACE:
-                if(cells[x][y].isFilled()){
-                    cells[x][y].draw();
-                } else {
-                    cells[x][y].fill();
-                }
+                cells[getX()][getY()].paint();
                 break;
 
             case KeyboardEvent.KEY_S:
@@ -136,10 +116,10 @@ public class Pencil extends Rectangle implements KeyboardHandler {
         //Not used.
     }
 
-    private void clear() {
+    public void clear() {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells.length; j++) {
-                cells[i][j].draw();
+                cells[i][j].clear();
             }
         }
     }

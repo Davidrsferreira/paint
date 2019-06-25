@@ -1,9 +1,9 @@
 package org.academiadecodigo.whiledlins.paint;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.whiledlins.cell.Cell;
 import org.academiadecodigo.whiledlins.gfx.PaintGfx;
-import org.academiadecodigo.whiledlins.gfx.Pencil;
+import org.academiadecodigo.whiledlins.gfx.Pointer;
 
 public class Paint {
 
@@ -14,22 +14,23 @@ public class Paint {
     public static final int ROWS = 25;
     public static final int COLS = 25;
 
-    private Rectangle[][] cells;
+
+    private Cell[][] cells;
     private PaintGfx paintGfx;
 
     public void init(){
 
-        cells = new Rectangle[ROWS][COLS];
+        cells = new Cell[ROWS][COLS];
         paintGfx = new PaintGfx();
-        cells = paintGfx.drawPanel();
 
     }
 
     public void startGame() {
 
-        Pencil pencil = new Pencil(PADDING, PADDING, CELL_SIZE, CELL_SIZE, cells);
-        pencil.setColor(Color.GREEN);
-        pencil.fill();
+        cells = paintGfx.drawPanel();
+
+        Pointer pointer = new Pointer(PADDING, PADDING, cells, Color.GREEN);
+        pointer.paint();
 
     }
 }

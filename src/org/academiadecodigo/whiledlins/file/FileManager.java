@@ -1,6 +1,6 @@
 package org.academiadecodigo.whiledlins.file;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.whiledlins.cell.Cell;
 
 import java.io.*;
 
@@ -15,7 +15,7 @@ public class FileManager {
     }
 
 
-    public void save(Rectangle[][] cells) {
+    public void save(Cell[][] cells) {
 
         FileWriter writer;
         try {
@@ -26,8 +26,8 @@ public class FileManager {
 
             for (int i = 0; i < cells.length; i++) {
                 for (int j = 0; j < cells.length; j++) {
-                    if (cells[i][j].isFilled()) {
-                        buffer = buffer;//getColor(cells[i][j]);
+                    if (cells[i][j].isPainted()) {
+                        buffer = buffer + "F";
                     } else {
                         buffer = buffer + "W";
                     }
@@ -46,22 +46,27 @@ public class FileManager {
         }
     }
 
-    public void load(Rectangle[][] cells){
+    public void load(Cell[][] cells){
 
         FileReader fileReader;
         try {
             fileReader = new FileReader(path);
 
-            char[] buffer = new char[ROWS];
+            char[] buffer = new char[ROWS + 1];
             int row = 0;
 
             while (fileReader.read(buffer) != -1) {
 
-                for (int i = 0; i < cells.length; i++) {
-                    if (buffer[i] == 0) {
-                        cells[row][i].draw();
-                    } else {
-                        cells[row][i].fill();
+                for (int i = 0; i <= cells.length; i++) {
+
+                    if (buffer[i] == '\n') continue;
+
+                    if (buffer[i] == 'W') {
+                        cells[row][i].paint();
+                        continue;
+                    }
+                    if (buffer[i] == 'F') {
+                        cells[row][i].paint();
                     }
                 }
                 row++;

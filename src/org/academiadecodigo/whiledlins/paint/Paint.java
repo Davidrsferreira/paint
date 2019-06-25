@@ -30,7 +30,7 @@ public class Paint {
         cells = paintGfx.drawPanel();
 
         Pointer pointer = new Pointer(PADDING, PADDING, cells, Color.GREEN);
-        pointer.paint();
+        pointer.paint(Color.GREEN);
 
     }
 }

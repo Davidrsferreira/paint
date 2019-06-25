@@ -8,7 +8,7 @@ import static org.academiadecodigo.whiledlins.paint.Paint.*;
 public class Cell {
 
     private Rectangle cell;
-    private Color color;
+    private char color;
     private int x;
     private int y;
     private boolean painted;
@@ -59,7 +59,11 @@ public class Cell {
 
     }
 
-    public void paint(){
+    public void paint(Color color){
+
+        cell.setColor(color);
+
+        setColor(color);
 
         if (painted){
             cell.draw();
@@ -86,5 +90,32 @@ public class Cell {
 
     public boolean isPainted() {
         return painted;
+    }
+
+    private void setColor(Color color) {
+
+        if (color == Color.BLACK){
+            this.color = 'B';
+            return;
+        }
+
+        if (color == Color.YELLOW){
+            this.color = 'Y';
+            return;
+        }
+
+        if (color == Color.RED){
+            this.color = 'R';
+            return;
+        }
+
+        if (color == Color.ORANGE){
+            this.color = 'O';
+            return;
+        }
+    }
+
+    public char getColor() {
+        return color;
     }
 }

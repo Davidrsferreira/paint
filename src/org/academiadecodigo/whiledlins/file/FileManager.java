@@ -1,5 +1,6 @@
 package org.academiadecodigo.whiledlins.file;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.whiledlins.cell.Cell;
 
 import java.io.*;
@@ -27,7 +28,7 @@ public class FileManager {
             for (int i = 0; i < cells.length; i++) {
                 for (int j = 0; j < cells.length; j++) {
                     if (cells[i][j].isPainted()) {
-                        buffer = buffer + "F";
+                        buffer = buffer + cells[i][j].getColor();
                     } else {
                         buffer = buffer + "W";
                     }
@@ -62,7 +63,7 @@ public class FileManager {
                     if (buffer[i] == '\n') continue;
 
                     if (buffer[i] == 'F') {
-                        cells[row][i].paint();
+                        cells[row][i].paint(Color.GREEN);
                     }
                 }
                 row++;

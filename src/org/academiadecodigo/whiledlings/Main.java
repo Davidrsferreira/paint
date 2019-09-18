@@ -1,6 +1,6 @@
-package org.academiadecodigo.whiledlins;
+package org.academiadecodigo.whiledlings;
 
-import org.academiadecodigo.whiledlins.paint.Paint;
+import org.academiadecodigo.whiledlings.paint.Paint;
 
 public class Main {
 

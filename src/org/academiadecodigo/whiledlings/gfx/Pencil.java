@@ -1,4 +1,4 @@
-package org.academiadecodigo.whiledlins.gfx;
+package org.academiadecodigo.whiledlings.gfx;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static org.academiadecodigo.whiledlins.paint.Paint.*;
+import static org.academiadecodigo.whiledlings.paint.Paint.*;
 
 public class Pencil extends Rectangle implements KeyboardHandler {
     

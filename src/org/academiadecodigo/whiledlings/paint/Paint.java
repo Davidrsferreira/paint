@@ -1,9 +1,9 @@
-package org.academiadecodigo.whiledlins.paint;
+package org.academiadecodigo.whiledlings.paint;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.whiledlins.gfx.PaintGfx;
-import org.academiadecodigo.whiledlins.gfx.Pencil;
+import org.academiadecodigo.whiledlings.gfx.PaintGfx;
+import org.academiadecodigo.whiledlings.gfx.Pencil;
 
 public class Paint {
 

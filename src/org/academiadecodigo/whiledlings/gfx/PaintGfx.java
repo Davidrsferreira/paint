@@ -11,7 +11,7 @@ public class PaintGfx {
 
     public Cell[][] drawPanel(){
 
-        Rectangle view = new Rectangle(PADDING,PADDING, 25 * CELL_SIZE, 25 * CELL_SIZE);
+        Rectangle view = new Rectangle(PADDING,PADDING, ROWS * CELL_SIZE, COLS * CELL_SIZE);
         view.setColor(Color.GRAY);
         view.draw();
 
@@ -42,6 +42,5 @@ public class PaintGfx {
         pic.draw();
 
     }
-
 
 }

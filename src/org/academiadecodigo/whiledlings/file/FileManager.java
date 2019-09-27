@@ -59,12 +59,7 @@ public class FileManager {
             while (fileReader.read(buffer) != -1) {
 
                 for (int i = 0; i <= cells.length; i++) {
-
-                    if (buffer[i] == '\n') continue;
-
-                    if (buffer[i] == 'F') {
-                        cells[row][i].paint(Color.GREEN);
-                    }
+                    cells[row][i].paint(getColor(buffer[i]));
                 }
                 row++;
             }
@@ -72,5 +67,21 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private Color getColor(char color) {
+
+        switch (color){
+            case 'B':
+                return Color.BLACK;
+            case 'R':
+                return Color.RED;
+            case 'Y':
+                return Color.YELLOW;
+            case 'O':
+                return Color.ORANGE;
+        }
+
+        return Color.WHITE;
     }
 }

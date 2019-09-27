@@ -27,10 +27,11 @@ public class Pointer extends Cell implements KeyboardHandler {
     public Pointer(int x, int y, Cell[][] cells, Color color){
         super(x, y, color);
         drawColorButtons();
-        paint(Color.GREEN);
+        paint(color);
         keyboard = new Keyboard(this);
         this.cells = cells;
         fileManager = new FileManager("./resources/file.txt");
+        this.color = Color.BLACK;
         init();
 
     }
@@ -194,12 +195,11 @@ public class Pointer extends Cell implements KeyboardHandler {
 
     private void drawColorButtons(){
 
-        colorBlack = new Rectangle((CELL_SIZE * 26) + 4, CELL_SIZE * 18, 25, 25);
         select = new Rectangle((CELL_SIZE * 26) + 2, (CELL_SIZE * 18) - 2, 29, 29);
-
         select.setColor(Color.GREEN);
         select.fill();
 
+        colorBlack = new Rectangle((CELL_SIZE * 26) + 4, CELL_SIZE * 18, 25, 25);
         colorBlack.setColor(Color.BLACK);
         colorBlack.fill();
 

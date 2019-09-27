@@ -62,10 +62,10 @@ public class Cell {
     public void paint(Color color){
 
         cell.setColor(color);
-
         setColor(color);
 
         if (painted){
+            cell.setColor(Color.BLACK);
             cell.draw();
             painted = false;
             return;
@@ -76,6 +76,7 @@ public class Cell {
     }
 
     public void clear(){
+        cell.setColor(Color.BLACK);
         cell.draw();
         painted = false;
     }

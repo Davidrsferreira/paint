@@ -14,7 +14,6 @@ public class Paint {
     public static final int ROWS = 25;
     public static final int COLS = 25;
 
-
     private Cell[][] cells;
     private PaintGfx paintGfx;
 
@@ -29,8 +28,8 @@ public class Paint {
 
         cells = paintGfx.drawPanel();
 
-        Pointer pointer = new Pointer(PADDING, PADDING, cells, Color.GREEN);
-        pointer.paint(Color.GREEN);
+        Pointer pointer = new Pointer(PADDING, PADDING, cells, Color.BLACK);
+        pointer.paint(Color.BLACK);
 
     }
 }

@@ -53,7 +53,7 @@ public class FileManager {
         try {
             fileReader = new FileReader(path);
 
-            char[] buffer = new char[ROWS + 1];
+            char[] buffer = new char[ROWS + 2];
             int row = 0;
 
             while (fileReader.read(buffer) != -1) {

@@ -16,10 +16,10 @@ public class Pointer extends Cell implements KeyboardHandler {
     private Keyboard keyboard;
     private Cell[][] cells;
     private FileManager fileManager;
-    private Rectangle colorBlack;
+    private Rectangle colorDark;
     private Rectangle colorRed;
     private Rectangle colorYellow;
-    private Rectangle colorOrange;
+    private Rectangle colorMag;
     private Rectangle select;
     private Color color;
 
@@ -32,6 +32,7 @@ public class Pointer extends Cell implements KeyboardHandler {
         this.cells = cells;
         fileManager = new FileManager("./resources/file.txt");
         this.color = Color.BLACK;
+        selectDark();
         init();
 
     }
@@ -70,9 +71,9 @@ public class Pointer extends Cell implements KeyboardHandler {
         clear.setKey(KeyboardEvent.KEY_C);
         clear.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-        KeyboardEvent black = new KeyboardEvent();
-        black.setKey(KeyboardEvent.KEY_B);
-        black.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        KeyboardEvent dark = new KeyboardEvent();
+        dark.setKey(KeyboardEvent.KEY_D);
+        dark.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         KeyboardEvent red = new KeyboardEvent();
         red.setKey(KeyboardEvent.KEY_R);
@@ -82,9 +83,9 @@ public class Pointer extends Cell implements KeyboardHandler {
         yellow.setKey(KeyboardEvent.KEY_Y);
         yellow.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-        KeyboardEvent orange = new KeyboardEvent();
-        orange.setKey(KeyboardEvent.KEY_O);
-        orange.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        KeyboardEvent mag = new KeyboardEvent();
+        mag.setKey(KeyboardEvent.KEY_M);
+        mag.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         keyboard.addEventListener(left);
         keyboard.addEventListener(right);
@@ -94,10 +95,10 @@ public class Pointer extends Cell implements KeyboardHandler {
         keyboard.addEventListener(save);
         keyboard.addEventListener(load);
         keyboard.addEventListener(clear);
-        keyboard.addEventListener(black);
+        keyboard.addEventListener(dark);
         keyboard.addEventListener(red);
         keyboard.addEventListener(yellow);
-        keyboard.addEventListener(orange);
+        keyboard.addEventListener(mag);
 
     }
 
@@ -140,8 +141,8 @@ public class Pointer extends Cell implements KeyboardHandler {
                 clear();
                 break;
 
-            case KeyboardEvent.KEY_B:
-                selectBlack();
+            case KeyboardEvent.KEY_D:
+                selectDark();
                 break;
 
             case KeyboardEvent.KEY_R:
@@ -152,8 +153,8 @@ public class Pointer extends Cell implements KeyboardHandler {
                 selectYellow();
                 break;
 
-            case KeyboardEvent.KEY_O:
-                selectOrange();
+            case KeyboardEvent.KEY_M:
+                selectMag();
                 break;
 
         }
@@ -165,9 +166,9 @@ public class Pointer extends Cell implements KeyboardHandler {
         color = Color.RED;
     }
 
-    private void selectBlack() {
-        select.translate(0, colorBlack.getY() - (select.getY() + 2));
-        color = Color.BLACK;
+    private void selectDark() {
+        select.translate(0, colorDark.getY() - (select.getY() + 2));
+        color = Color.DARK_GRAY;
     }
 
     private void selectYellow() {
@@ -175,9 +176,9 @@ public class Pointer extends Cell implements KeyboardHandler {
         color = Color.YELLOW;
     }
 
-    private void selectOrange() {
-        select.translate(0, colorOrange.getY() - (select.getY() + 2));
-        color = Color.ORANGE;
+    private void selectMag() {
+        select.translate(0, colorMag.getY() - (select.getY() + 2));
+        color = Color.MAGENTA;
     }
 
     @Override
@@ -199,9 +200,9 @@ public class Pointer extends Cell implements KeyboardHandler {
         select.setColor(Color.GREEN);
         select.fill();
 
-        colorBlack = new Rectangle((CELL_SIZE * 26) + 4, CELL_SIZE * 18, 25, 25);
-        colorBlack.setColor(Color.BLACK);
-        colorBlack.fill();
+        colorDark = new Rectangle((CELL_SIZE * 26) + 4, CELL_SIZE * 18, 25, 25);
+        colorDark.setColor(Color.DARK_GRAY);
+        colorDark.fill();
 
         colorRed = new Rectangle((CELL_SIZE * 26) + 4, CELL_SIZE * 20, 25, 25);
         colorRed.setColor(Color.RED);
@@ -211,9 +212,9 @@ public class Pointer extends Cell implements KeyboardHandler {
         colorYellow.setColor(Color.YELLOW);
         colorYellow.fill();
 
-        colorOrange = new Rectangle((CELL_SIZE * 26) + 4, CELL_SIZE * 24, 25, 25);
-        colorOrange.setColor(Color.ORANGE);
-        colorOrange.fill();
+        colorMag = new Rectangle((CELL_SIZE * 26) + 4, CELL_SIZE * 24, 25, 25);
+        colorMag.setColor(Color.MAGENTA);
+        colorMag.fill();
 
     }
 }

@@ -89,14 +89,18 @@ public class Cell {
         return y;
     }
 
+    public void setPainted() {
+        painted = true;
+    }
+
     public boolean isPainted() {
         return painted;
     }
 
     private void setColor(Color color) {
 
-        if (color == Color.BLACK){
-            this.color = 'B';
+        if (color == Color.DARK_GRAY){
+            this.color = 'D';
             return;
         }
 
@@ -110,10 +114,12 @@ public class Cell {
             return;
         }
 
-        if (color == Color.ORANGE){
-            this.color = 'O';
+        if (color == Color.MAGENTA){
+            this.color = 'M';
             return;
         }
+
+        this.color = 'B';
     }
 
     public char getColor() {

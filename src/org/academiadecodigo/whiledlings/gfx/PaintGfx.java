@@ -38,9 +38,6 @@ public class PaintGfx {
         pic = new Picture((26 * CELL_SIZE) + 4, (PADDING * 4) + 2, "./resources/folder.png");
         pic.draw();
 
-        pic = new Picture((26 * CELL_SIZE) + 4, (PADDING * 7) + 2, "./resources/eraser.png");
-        pic.draw();
-
     }
 
 }

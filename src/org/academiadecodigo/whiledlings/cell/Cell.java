@@ -25,7 +25,9 @@ public class Cell {
 
     public void moveLeft() {
 
-        if ((cell.getX() - CELL_SIZE) < 0) return;
+        if ((cell.getX() - CELL_SIZE) < 0) {
+            return;
+        }
 
         cell.translate(-CELL_SIZE, 0);
         y = getY() - 1;
@@ -34,7 +36,9 @@ public class Cell {
 
     public void moveRight() {
 
-        if ((cell.getX() + CELL_SIZE) > WIDTH) return;
+        if ((cell.getX() + CELL_SIZE) > WIDTH) {
+            return;
+        }
 
         cell.translate(CELL_SIZE, 0);
         y = getY() + 1;
@@ -43,7 +47,9 @@ public class Cell {
 
     public void moveUp() {
 
-        if ((cell.getY() - CELL_SIZE) < 0) return;
+        if ((cell.getY() - CELL_SIZE) < 0) {
+            return;
+        }
 
         cell.translate( 0, -CELL_SIZE);
         x = getX() - 1;
@@ -52,7 +58,9 @@ public class Cell {
 
     public void moveDown() {
 
-        if ((cell.getY() + CELL_SIZE) > HEIGHT) return;
+        if ((cell.getY() + CELL_SIZE) > HEIGHT) {
+            return;
+        }
 
         cell.translate(0, CELL_SIZE);
         x = getX() + 1;

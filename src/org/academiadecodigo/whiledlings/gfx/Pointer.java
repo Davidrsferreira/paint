@@ -187,8 +187,11 @@ public class Pointer extends Cell implements KeyboardHandler {
     }
 
     public void clear() {
+
         for (int i = 0; i < cells.length; i++) {
+
             for (int j = 0; j < cells.length; j++) {
+
                 cells[i][j].clear();
             }
         }

@@ -19,6 +19,7 @@ public class FileManager {
     public void save(Cell[][] cells) {
 
         FileWriter writer;
+
         try {
 
             writer = new FileWriter(path);
@@ -26,11 +27,17 @@ public class FileManager {
             String buffer = "";
 
             for (int i = 0; i < cells.length; i++) {
+
                 for (int j = 0; j < cells.length; j++) {
+
                     if (cells[i][j].isPainted()) {
-                        buffer = buffer + cells[i][j].getColor();
+
+                        buffer += cells[i][j].getColor();
+
                     } else {
-                        buffer = buffer + "B";
+
+                        buffer += "B";
+
                     }
                 }
 
@@ -50,7 +57,9 @@ public class FileManager {
     public void load(Cell[][] cells){
 
         FileReader fileReader;
+
         try {
+
             fileReader = new FileReader(path);
 
             char[] buffer = new char[ROWS + 2];
@@ -61,10 +70,14 @@ public class FileManager {
                 for (int i = 0; i < cells.length; i++) {
 
                     if (buffer[i] == 'B'){
+
                         cells[row][i].setPainted();
+
                     }
+
                     cells[row][i].paint(getColor(buffer[i]));
                 }
+
                 row++;
             }
 
@@ -76,12 +89,16 @@ public class FileManager {
     private Color getColor(char color) {
 
         switch (color){
+
             case 'D':
                 return Color.DARK_GRAY;
+
             case 'R':
                 return Color.RED;
+
             case 'Y':
                 return Color.YELLOW;
+
             case 'M':
                 return Color.MAGENTA;
         }

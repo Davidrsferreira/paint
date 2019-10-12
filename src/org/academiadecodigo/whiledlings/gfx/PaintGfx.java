@@ -20,9 +20,12 @@ public class PaintGfx {
         Cell[][] cells = new Cell[ROWS][COLS];
 
         for (int i = 0; i < cells.length; i++){
+
             for (int j = 0; j < cells.length; j++){
+
                 cells[i][j] = new Cell(j, i, Color.BLACK);
                 cells[i][j].paint(Color.BLACK);
+
             }
         }
 

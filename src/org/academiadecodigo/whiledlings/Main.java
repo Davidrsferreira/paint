@@ -10,5 +10,6 @@ public class Main {
 
         paint.init();
         paint.startGame();
+
     }
 }
